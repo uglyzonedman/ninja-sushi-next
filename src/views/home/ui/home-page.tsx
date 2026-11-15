@@ -1,8 +1,41 @@
+import banner1 from "@/shared/assets/banner1.webp";
+import banner2 from "@/shared/assets/banner2.webp";
+import banner3 from "@/shared/assets/banner3.webp";
+import { BannerSlider, type Banner } from "@/widgets/banner-slider";
+import { CategoryList } from "@/widgets/category-list";
+
+const banners: Banner[] = [
+  {
+    key: "sushi",
+    image: banner1,
+    badge: "Новинка",
+    title: "Нигири-сет «Ассорти»",
+    text: "Лосось, тунец, угорь и креветка на тёплом рисе",
+    href: "/",
+  },
+  {
+    key: "big-set",
+    image: banner2,
+    badge: "−20%",
+    title: "Большой сет на компанию",
+    text: "60 штук — роллы, суши и гунканы для всех",
+    href: "/",
+  },
+  {
+    key: "hot-rolls",
+    image: banner3,
+    badge: "Хит",
+    title: "Запечённые роллы",
+    text: "Тёплые роллы с соусом унаги и кунжутом",
+    href: "/",
+  },
+];
+
 export function HomePage() {
   return (
-    <section>
-      <h1 className="text-3xl font-bold">Главная</h1>
-      <p className="mt-2 text-neutral-600">Тестовый контент главной страницы.</p>
+    <section className="flex flex-col gap-8">
+      <BannerSlider banners={banners} />
+      <CategoryList />
     </section>
   );
 }

@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --container-main: 1576px;
+  --color-primary: #ff6633;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter);
+}

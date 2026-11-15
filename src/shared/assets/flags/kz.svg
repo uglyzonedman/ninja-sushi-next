@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16">
+  <rect width="24" height="16" rx="2" fill="#00AFCA"/>
+  <g fill="#FEC50C">
+    <g transform="translate(13 7)">
+      <circle r="2.4"/>
+      <g id="r">
+        <path d="M-0.35 -2.9 L0 -4.2 L0.35 -2.9 Z"/>
+      </g>
+      <use href="#r" transform="rotate(22.5)"/>
+      <use href="#r" transform="rotate(45)"/>
+      <use href="#r" transform="rotate(67.5)"/>
+      <use href="#r" transform="rotate(90)"/>
+      <use href="#r" transform="rotate(112.5)"/>
+      <use href="#r" transform="rotate(135)"/>
+      <use href="#r" transform="rotate(157.5)"/>
+      <use href="#r" transform="rotate(180)"/>
+      <use href="#r" transform="rotate(202.5)"/>
+      <use href="#r" transform="rotate(225)"/>
+      <use href="#r" transform="rotate(247.5)"/>
+      <use href="#r" transform="rotate(270)"/>
+      <use href="#r" transform="rotate(292.5)"/>
+      <use href="#r" transform="rotate(315)"/>
+      <use href="#r" transform="rotate(337.5)"/>
+    </g>
+    <path d="M9.2 12.2 Q13 10.4 16.8 12.2 Q13 11.4 9.2 12.2 Z"/>
+    <rect x="2" y="1.5" width="1.2" height="13"/>
+    <path d="M3.2 2.5 h1 v1 h-1 Z M3.2 5 h1 v1 h-1 Z M3.2 7.5 h1 v1 h-1 Z M3.2 10 h1 v1 h-1 Z M3.2 12.5 h1 v1 h-1 Z"/>
+  </g>
+</svg>

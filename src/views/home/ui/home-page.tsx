@@ -3,6 +3,8 @@ import banner2 from "@/shared/assets/banner2.webp";
 import banner3 from "@/shared/assets/banner3.webp";
 import { BannerSlider, type Banner } from "@/widgets/banner-slider";
 import { CategoryList } from "@/widgets/category-list";
+import { ProductSection } from "@/widgets/product-section";
+import { getProductsByCategory } from "@/entities/product";
 
 const banners: Banner[] = [
   {
@@ -36,6 +38,27 @@ export function HomePage() {
     <section className="flex flex-col gap-8">
       <BannerSlider banners={banners} />
       <CategoryList />
+
+      <ProductSection
+        href="/sushi"
+        title="Суши"
+        products={getProductsByCategory("sushi")}
+      />
+      <ProductSection
+        href="/rolls"
+        title="Роллы"
+        products={getProductsByCategory("rolls")}
+      />
+      <ProductSection
+        href="/sets"
+        title="Сеты"
+        products={getProductsByCategory("sets")}
+      />
+      <ProductSection
+        href="/drinks"
+        title="Напитки"
+        products={getProductsByCategory("drinks")}
+      />
     </section>
   );
 }

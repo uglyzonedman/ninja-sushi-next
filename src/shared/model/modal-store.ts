@@ -13,10 +13,11 @@ type ModalState = {
 
 export const useModalStore = create<ModalState>()((set) => ({
   opened: {},
-  openModal: (id) => set((s) => ({ opened: { ...s.opened, [id]: true } })),
+  // Одновременно открыта только одна модалка: открытие закрывает остальные
+  openModal: (id) => set({ opened: { [id]: true } }),
   closeModal: (id) => set((s) => ({ opened: { ...s.opened, [id]: false } })),
   toggleModal: (id) =>
-    set((s) => ({ opened: { ...s.opened, [id]: !s.opened[id] } })),
+    set((s) => ({ opened: s.opened[id] ? {} : { [id]: true } })),
   closeAll: () => set({ opened: {} }),
 }));
 

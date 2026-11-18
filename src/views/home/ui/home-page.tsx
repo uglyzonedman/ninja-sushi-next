@@ -40,22 +40,22 @@ export function HomePage() {
       <CategoryList />
 
       <ProductSection
-        href="/sushi"
+        href="/products/sushi"
         title="Суши"
         products={getProductsByCategory("sushi")}
       />
       <ProductSection
-        href="/rolls"
+        href="/products/rolls"
         title="Роллы"
         products={getProductsByCategory("rolls")}
       />
       <ProductSection
-        href="/sets"
+        href="/products/sets"
         title="Сеты"
         products={getProductsByCategory("sets")}
       />
       <ProductSection
-        href="/drinks"
+        href="/products/drinks"
         title="Напитки"
         products={getProductsByCategory("drinks")}
       />

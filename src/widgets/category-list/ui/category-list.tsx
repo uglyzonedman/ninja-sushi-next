@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+
 import { CategoryCard, categories } from "@/entities/category";
 
 export function CategoryList() {
-  const [activeKey, setActiveKey] = useState(categories[0].key);
+  const pathname = usePathname();
 
   return (
     <ul className="flex flex-wrap gap-3 max-w-max w-full mx-auto">
@@ -12,8 +13,7 @@ export function CategoryList() {
         <li key={category.key}>
           <CategoryCard
             category={category}
-            isActive={category.key === activeKey}
-            onClick={() => setActiveKey(category.key)}
+            isActive={pathname === `/products/${category.key}`}
           />
         </li>
       ))}

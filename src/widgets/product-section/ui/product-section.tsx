@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { ProductSectionProps } from "../model/types";
+import { ArrowRight } from "lucide-react";
+
 import { ProductCard } from "@/entities/product";
+
+import type { ProductSectionProps } from "../model/types";
 
 export const ProductSection = ({
   href,
@@ -13,9 +16,10 @@ export const ProductSection = ({
         <h2 className="text-3xl font-bold text-[#1D1D1F]">{title}</h2>
         <Link
           href={href}
-          className="text-base font-medium text-primary transition-opacity hover:opacity-70"
+          className="group flex items-center gap-2 text-base font-medium text-primary transition-opacity hover:opacity-70"
         >
           Смотреть все
+          <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
 

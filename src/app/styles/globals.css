@@ -8,3 +8,23 @@
 @theme inline {
   --font-sans: var(--font-inter);
 }
+
+/* Тонкий аккуратный скроллбар для списков внутри модалок/панелей */
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #d2d2d7 transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #d2d2d7;
+    border-radius: 9999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #aeaeb2;
+  }
+}

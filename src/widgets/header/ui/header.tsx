@@ -24,6 +24,7 @@ export function Header() {
   const [currentLang, setCurrentLang] = useState("RU");
   const cartModal = useModal("cart-modal");
   const authModal = useModal("auth");
+  const notificationModal = useModal("notification-modal");
 
   const cityLabel = cities.find((item) => item.id == currentCity);
 
@@ -34,7 +35,7 @@ export function Header() {
   return (
     <header
       {...{ [SITE_HEADER_ATTR]: true }}
-      className={`sticky top-0 ${cartModal.isOpen ? "z-50" : "z-10"} bg-white w-full max-w-main mx-auto px-6 py-3 mt-4 rounded-2xl`}
+      className={`sticky top-0 z-50 bg-white w-full max-w-main mx-auto px-6 py-3 mt-4 rounded-2xl`}
     >
       <div className="flex items-center justify-between gap-8">
         <Image src={logo} alt="logo" />
@@ -77,7 +78,10 @@ export function Header() {
         </a>
 
         <div className="flex items-center gap-2">
-          <button className={`p-4 ${iconButton}`}>
+          <button
+            onClick={notificationModal.open}
+            className={`p-4 ${iconButton}`}
+          >
             <Bell />
           </button>
           <button className={`p-4 ${iconButton}`}>

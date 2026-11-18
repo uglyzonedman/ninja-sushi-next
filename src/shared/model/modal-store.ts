@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 /** Все модалки приложения. Новую модалку — добавь сюда id. */
-export type ModalId = "auth" | "cart-modal";
+export type ModalId = "auth" | "cart-modal" | "notification-modal";
 
 type ModalState = {
   opened: Partial<Record<ModalId, boolean>>;

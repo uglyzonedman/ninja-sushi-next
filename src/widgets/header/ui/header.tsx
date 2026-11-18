@@ -10,6 +10,7 @@ import kzFlag from "@/shared/assets/flags/kz.svg";
 import cities from "@/shared/config/cities";
 import { languages } from "@/shared/config/languages";
 import { siteConfig } from "@/shared/config";
+import { useModal } from "@/shared/model";
 
 const textLink =
   "text-[#1D1D1F] text-base font-medium transition-colors hover:text-primary active:text-primary";
@@ -21,6 +22,7 @@ export function Header() {
   const pathname = usePathname();
   const [currentCity, setCurrentCity] = useState(1);
   const [currentLang, setCurrentLang] = useState("RU");
+  const authModal = useModal("auth");
 
   const cityLabel = cities.find((item) => item.id == currentCity);
 
@@ -77,7 +79,7 @@ export function Header() {
           <button className={`p-4 ${iconButton}`}>
             <Heart />
           </button>
-          <button className={`p-4 ${iconButton}`}>
+          <button onClick={authModal.open} className={`p-4 ${iconButton}`}>
             <UserRound />
           </button>
           <button className={`py-4 px-5 flex items-center gap-3 ${iconButton}`}>

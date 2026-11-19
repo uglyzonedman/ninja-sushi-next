@@ -5,7 +5,6 @@ import { ArrowDown } from "lucide-react";
 import { useState } from "react";
 
 type ProductsTypePageProps = {
-  /** Ключ категории из URL: /products/[type] */
   category: string;
   title: string;
 };
@@ -17,11 +16,13 @@ type SortOrder = "desc" | "asc";
 const types = ["Все", "Классические"];
 //
 
-export const ProductsTypePage = ({ category, title }: ProductsTypePageProps) => {
+export const ProductsTypePage = ({
+  category,
+  title,
+}: ProductsTypePageProps) => {
   const [type, setType] = useState("Все");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
 
-  // Временно: пока нет API, берём товары из моков
   const products = mockProducts
     .filter((product) => product.category === category)
     .sort((a, b) =>
@@ -74,11 +75,27 @@ export const ProductsTypePage = ({ category, title }: ProductsTypePageProps) => 
         </p>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
+          {products.slice(0, 8).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       )}
+      <button className="text-[#00CC2D] cursor-pointer font-semibold bg-white rounded-xl py-4 max-w-[256px] w-full mx-auto">
+        Показать больше
+      </button>
+
+      <div className="max-w-[780px] mx-auto w-full">
+        <p className="text-[#9E9E9E] ">
+          В Сети полно всевозможных сервисов учета, начиная от учета времени или
+          калорий, заканчивая учетом финансов. А вот сервиса учета инструментов
+          до сих пор не было. Теперь – есть. Вообще, конечно, идея учета
+          рабочего инструмента, расходных материалов и комплект... Теперь –
+          есть.
+        </p>
+        <button className="text-[#00CC2D] float-right mt-2">
+          Читать больше{" "}
+        </button>
+      </div>
     </div>
   );
 };

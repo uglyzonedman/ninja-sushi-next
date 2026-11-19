@@ -1,27 +1,24 @@
 "use client";
 import Image from "next/image";
 
-import kzFlag from "@/shared/assets/flags/kz.svg";
 import googleIcon from "@/shared/assets/icons/google.svg";
 import telegramIcon from "@/shared/assets/icons/telegram.svg";
 import { useModal } from "@/shared/model";
 import { Modal } from "@/shared/ui";
-import { IMaskInput } from "react-imask";
 import { useState } from "react";
 
 import { CodeInput } from "./code-input";
 
 type AuthStep = "auth" | "verify_code";
 
-const PHONE_LENGTH = 10;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CODE_LENGTH = 4;
 
 export const AuthModal = () => {
   const { isOpen, close } = useModal("auth");
 
   const [typeAuth, setTypeAuth] = useState<AuthStep>("auth");
-  const [phone, setPhone] = useState("");
-  const [formattedPhone, setFormattedPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
 
   const handleClose = () => {
@@ -30,8 +27,10 @@ export const AuthModal = () => {
     setCode("");
   };
 
+  const isEmailValid = EMAIL_REGEX.test(email.trim());
+
   const handleSendCode = () => {
-    if (phone.length !== PHONE_LENGTH) return;
+    if (!isEmailValid) return;
     setTypeAuth("verify_code");
   };
 
@@ -39,7 +38,7 @@ export const AuthModal = () => {
 
   const handleVerify = () => {
     if (!isCodeComplete) return;
-    console.log({ phone: `+7${phone}`, code });
+    console.log({ email: email.trim(), code });
   };
 
   return (
@@ -49,36 +48,28 @@ export const AuthModal = () => {
           <div className="flex flex-col gap-2 pr-10">
             <h3 className="text-[#1A1A1A] font-bold text-3xl">Авторизация</h3>
             <p className="text-[#6E6E73] font-medium text-base">
-              Введите ваш номер телефона:
+              Введите ваш email:
             </p>
           </div>
 
           <div className="flex flex-col gap-2">
-            <p className="text-[#87878C] text-sm">Номер телефона</p>
-            <div className="flex items-center gap-2">
-              <div className="flex h-12 shrink-0 items-center gap-2 bg-[#F5F5F7] rounded-xl px-4">
-                <Image src={kzFlag} alt="Казахстан" width={24} height={16} />
-                <span className="text-[#1D1D1F] font-medium">+7</span>
-              </div>
-              <IMaskInput
-                mask="(000) 000-00-00"
-                placeholder="(700) 123-45-67"
-                type="tel"
-                inputMode="numeric"
-                value={formattedPhone}
-                onAccept={(value, mask) => {
-                  setFormattedPhone(value);
-                  setPhone(mask.unmaskedValue);
-                }}
-                className="h-12 w-full min-w-0 bg-[#F5F5F7] rounded-xl px-4 text-[#1D1D1F] font-medium outline-none ring-primary transition-shadow placeholder:text-[#87878C] focus:ring-2"
-              />
-            </div>
+            <p className="text-[#87878C] text-sm">Email</p>
+            <input
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              placeholder="example@mail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSendCode()}
+              className="h-12 w-full min-w-0 bg-[#F5F5F7] rounded-xl px-4 text-[#1D1D1F] font-medium outline-none ring-primary transition-shadow placeholder:text-[#87878C] focus:ring-2"
+            />
             <button
               onClick={handleSendCode}
-              disabled={phone.length !== PHONE_LENGTH}
+              disabled={!isEmailValid}
               className="bg-[#00CC2D] text-white font-medium text-base py-3 rounded-xl mt-3 disabled:opacity-50"
             >
-              Войти по номеру телефона
+              Войти по email
             </button>
 
             <span className="text-[#9E9E9E] font-medium text-center">Или</span>
@@ -102,10 +93,10 @@ export const AuthModal = () => {
               Подтверждение
             </h3>
             <p className="text-[#6E6E73] text-center font-medium">
-              Введите 4-х значный код,отправленный на мобильный номер
+              Введите 4-х значный код, отправленный на email
             </p>
             <p className="text-[#1D1D1F] font-medium text-base text-center">
-              +7 {formattedPhone}
+              {email.trim()}
             </p>
             <button
               onClick={() => {
@@ -114,12 +105,12 @@ export const AuthModal = () => {
               }}
               className="font-medium text-sm text-[#00CC2D]"
             >
-              Изменить номер
+              Изменить email
             </button>
           </div>
 
           <div className="flex flex-col gap-2">
-            <p className="text-[#87878C] text-sm">Код из СМС</p>
+            <p className="text-[#87878C] text-sm">Код из письма</p>
             <CodeInput length={CODE_LENGTH} value={code} onChange={setCode} />
             <button
               onClick={handleVerify}

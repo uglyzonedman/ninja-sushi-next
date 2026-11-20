@@ -33,12 +33,14 @@ export const ProductsTypePage = ({
     setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
 
   return (
-    <div className="max-w-main w-full mx-auto flex flex-col gap-8">
+    <div className="max-w-main w-full mx-auto flex flex-col gap-6 md:gap-8">
       <CategoryList />
 
       <div>
-        <h3 className="text-[#1D1D1F] font-bold text-5xl">{title}</h3>
-        <div className="flex flex-wrap items-center justify-between gap-4 mt-8">
+        <h3 className="text-[#1D1D1F] font-bold text-3xl md:text-5xl">
+          {title}
+        </h3>
+        <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 mt-4 md:mt-8">
           <div className="flex items-center gap-2">
             {types.map((t) => (
               <button
@@ -46,7 +48,7 @@ export const ProductsTypePage = ({
                 key={t}
                 onClick={() => setType(t)}
                 aria-pressed={type === t}
-                className={`${type === t ? "bg-primary text-white" : "bg-white text-[#1D1D1F] hover:text-primary"} font-medium rounded-xl py-3 px-4 transition-colors`}
+                className={`${type === t ? "bg-primary text-white" : "bg-white text-[#1D1D1F] hover:text-primary"} font-medium rounded-xl py-2.5 px-4 md:py-3 transition-colors`}
               >
                 {t}
               </button>
@@ -55,7 +57,7 @@ export const ProductsTypePage = ({
           <button
             type="button"
             onClick={toggleSort}
-            className="flex items-center gap-2 text-[#1D1D1F] font-medium transition-colors hover:text-primary"
+            className="flex items-center gap-2 text-sm md:text-base text-[#1D1D1F] font-medium transition-colors hover:text-primary"
           >
             <span>
               {sortOrder === "desc"
@@ -74,18 +76,18 @@ export const ProductsTypePage = ({
           В этой категории пока нет товаров
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {products.slice(0, 8).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       )}
-      <button className="text-[#00CC2D] cursor-pointer font-semibold bg-white rounded-xl py-4 max-w-[256px] w-full mx-auto">
+      <button className="text-[#00CC2D] cursor-pointer font-semibold bg-white rounded-xl py-3 md:py-4 max-w-[256px] w-full mx-auto">
         Показать больше
       </button>
 
       <div className="max-w-[780px] mx-auto w-full">
-        <p className="text-[#9E9E9E] ">
+        <p className="text-sm md:text-base text-[#9E9E9E]">
           В Сети полно всевозможных сервисов учета, начиная от учета времени или
           калорий, заканчивая учетом финансов. А вот сервиса учета инструментов
           до сих пор не было. Теперь – есть. Вообще, конечно, идея учета

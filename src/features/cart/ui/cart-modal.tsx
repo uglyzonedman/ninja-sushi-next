@@ -55,7 +55,7 @@ export const CartModal = () => {
     <Modal
       open={isOpen}
       onClose={close}
-      className="w-[600px] flex flex-col min-h-0"
+      className="w-[calc(100vw-1rem)] md:w-[min(600px,calc(100vw-2rem))] flex flex-col min-h-0"
       topLayer={false}
       panelClassName="absolute flex flex-col overflow-hidden"
       panelStyle={
@@ -65,9 +65,11 @@ export const CartModal = () => {
         }
       }
     >
-      <h3 className="text-[#1D1D1F] font-bold text-3xl">Ваш заказ</h3>
+      <h3 className="text-[#1D1D1F] font-bold text-2xl md:text-3xl">
+        Ваш заказ
+      </h3>
 
-      <div className="relative mt-3 -mx-8 min-h-0 flex-1 flex flex-col">
+      <div className="relative mt-3 -mx-5 md:-mx-8 min-h-0 flex-1 flex flex-col">
         <div
           aria-hidden
           className={`pointer-events-none absolute inset-x-0 top-0 z-10 h-6 bg-linear-to-b from-white to-transparent transition-opacity duration-200 ${scrollEdges.top ? "opacity-100" : "opacity-0"}`}
@@ -79,7 +81,7 @@ export const CartModal = () => {
 
         <div
           ref={listRef}
-          className="scrollbar-thin max-h-[408px] min-h-0 flex-1 overflow-y-auto overscroll-contain px-8 py-2 flex flex-col gap-3"
+          className="scrollbar-thin max-h-[408px] min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 md:px-8 py-2 flex flex-col gap-3"
         >
           {items.length === 0 && (
             <p className="text-[#87878C] font-medium py-8 text-center">
@@ -98,7 +100,7 @@ export const CartModal = () => {
         </div>
       </div>
 
-      <div className="-mx-8 -mb-8 mt-6 shrink-0 bg-[#F5F5F7] px-8 py-6 flex flex-col gap-3">
+      <div className="-mx-5 -mb-5 md:-mx-8 md:-mb-8 mt-4 md:mt-6 shrink-0 bg-[#F5F5F7] px-5 py-4 md:px-8 md:py-6 flex flex-col gap-3">
         {isBelowMinimum && (
           <p className="text-[#FF6633] text-sm font-medium">
             Минимальная сумма заказа {formatPrice(MIN_ORDER_SUM)}. Добавьте ещё
@@ -108,14 +110,14 @@ export const CartModal = () => {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-[#AEAEAE] text-sm">Итого:</p>
-            <p className="text-[#1D1D1F] font-bold text-3xl tabular-nums whitespace-nowrap">
+            <p className="text-[#1D1D1F] font-bold text-2xl md:text-3xl tabular-nums whitespace-nowrap">
               {formatPrice(total)}
             </p>
           </div>
           <button
             type="button"
             disabled={isBelowMinimum}
-            className="text-white font-medium bg-[#00CC2D] rounded-xl py-4 px-6 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-white font-medium bg-[#00CC2D] rounded-xl py-3 px-4 md:py-4 md:px-6 whitespace-nowrap transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Оформить заказ
           </button>

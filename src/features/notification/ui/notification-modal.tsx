@@ -45,7 +45,7 @@ export const NotificationModal = () => {
     <Modal
       open={isOpen}
       onClose={close}
-      className="w-[600px] flex flex-col min-h-0"
+      className="w-[calc(100vw-1rem)] md:w-[min(600px,calc(100vw-2rem))] flex flex-col min-h-0"
       topLayer={false}
       panelClassName="absolute flex flex-col overflow-hidden"
       panelStyle={
@@ -55,8 +55,10 @@ export const NotificationModal = () => {
         }
       }
     >
-      <div className="flex items-center justify-between gap-4">
-        <h3 className="text-[#1D1D1F] font-bold text-3xl">Уведомления</h3>
+      <div className="flex items-center justify-between gap-4 pr-10">
+        <h3 className="text-[#1D1D1F] font-bold text-2xl md:text-3xl">
+          Уведомления
+        </h3>
         {unreadCount > 0 && (
           <button
             type="button"
@@ -68,7 +70,7 @@ export const NotificationModal = () => {
         )}
       </div>
 
-      <div className="relative mt-3 -mx-8 min-h-0 flex-1 flex flex-col">
+      <div className="relative mt-3 -mx-5 md:-mx-8 min-h-0 flex-1 flex flex-col">
         <div
           aria-hidden
           className={`pointer-events-none absolute inset-x-0 top-0 z-10 h-6 bg-linear-to-b from-white to-transparent transition-opacity duration-200 ${scrollEdges.top ? "opacity-100" : "opacity-0"}`}
@@ -80,7 +82,7 @@ export const NotificationModal = () => {
 
         <div
           ref={listRef}
-          className="scrollbar-thin max-h-[408px] min-h-0 flex-1 overflow-y-auto overscroll-contain px-8 py-2 flex flex-col gap-3"
+          className="scrollbar-thin max-h-[408px] min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 md:px-8 py-2 flex flex-col gap-3"
         >
           {notifications.length === 0 && (
             <p className="text-[#87878C] font-medium py-8 text-center">

@@ -35,7 +35,7 @@ const banners: Banner[] = [
 
 export function HomePage() {
   return (
-    <section className="flex flex-col gap-8">
+    <section className="flex flex-col gap-6 md:gap-8">
       <BannerSlider banners={banners} />
       <CategoryList />
 

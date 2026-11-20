@@ -12,7 +12,9 @@ export function MainLayout({ children }: { children: ReactNode }) {
       <AuthModal />
       <NotificationModal />
       <CartModal />
-      <main className="w-full flex-1 px-4 py-8">{children}</main>
+      <main className="w-full flex-1 px-2 py-4 md:px-4 md:py-8">
+        {children}
+      </main>
       <Footer />
     </div>
   );

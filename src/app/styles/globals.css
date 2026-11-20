@@ -28,3 +28,12 @@
     background: #aeaeb2;
   }
 }
+
+/* Горизонтальная прокрутка без видимого скроллбара (ленты категорий и т.п.) */
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

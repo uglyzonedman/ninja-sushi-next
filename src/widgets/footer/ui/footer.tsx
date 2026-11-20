@@ -12,11 +12,15 @@ const socialButton =
 
 export function Footer() {
   return (
-    <footer className="mt-auto w-full max-w-main mx-auto mb-4 rounded-2xl bg-white px-6 py-10">
-      <div className="flex flex-wrap justify-between gap-10">
-        <div className="flex flex-col gap-6">
-          <Image src={logo} alt="logo" />
-          <div className="flex items-center gap-3">
+    <footer className="mt-auto w-[calc(100%-1rem)] md:w-[calc(100%-2rem)] max-w-main mx-auto mb-2 md:mb-4 rounded-2xl bg-white px-4 py-8 md:px-6 md:py-10">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:flex md:flex-wrap md:justify-between md:gap-10">
+        <div className="col-span-2 flex flex-col gap-6">
+          <Image
+            src={logo}
+            alt="Ninja Sushi"
+            className="h-10 w-auto md:h-12 self-start"
+          />
+          <div className="flex flex-wrap items-center gap-3">
             <StoreButton store="app-store" href={siteConfig.apps.appStore} />
             <StoreButton
               store="google-play"

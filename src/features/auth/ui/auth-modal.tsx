@@ -3,11 +3,14 @@ import Image from "next/image";
 
 import googleIcon from "@/shared/assets/icons/google.svg";
 import telegramIcon from "@/shared/assets/icons/telegram.svg";
-import { useModal } from "@/shared/model";
+import { useAuthStore, useModal } from "@/shared/model";
 import { Modal } from "@/shared/ui";
 import { useState } from "react";
 
 import { CodeInput } from "./code-input";
+import { useMutation } from "@tanstack/react-query";
+import { authCodes } from "../api/auth-code";
+import { login } from "../api/login";
 
 type AuthStep = "auth" | "verify_code";
 
@@ -16,6 +19,7 @@ const CODE_LENGTH = 4;
 
 export const AuthModal = () => {
   const { isOpen, close } = useModal("auth");
+  const setTokens = useAuthStore((s) => s.setTokens);
 
   const [typeAuth, setTypeAuth] = useState<AuthStep>("auth");
   const [email, setEmail] = useState("");
@@ -29,9 +33,29 @@ export const AuthModal = () => {
 
   const isEmailValid = EMAIL_REGEX.test(email.trim());
 
+  const authCodeMutate = useMutation({
+    mutationFn: () => authCodes({ email: email }),
+    mutationKey: ["auth-code"],
+    onSuccess: () => {
+      setTypeAuth("verify_code");
+    },
+    onError: (error) => {
+      console.log(`error`, error);
+    },
+  });
+
+  const loginMutate = useMutation({
+    mutationFn: () => login({ code: code, email }),
+    mutationKey: ["login"],
+    onSuccess: (tokens) => {
+      setTokens(tokens);
+      handleClose();
+    },
+  });
+
   const handleSendCode = () => {
     if (!isEmailValid) return;
-    setTypeAuth("verify_code");
+    authCodeMutate.mutate();
   };
 
   const isCodeComplete = new RegExp(`^\\d{${CODE_LENGTH}}$`).test(code);
@@ -39,14 +63,21 @@ export const AuthModal = () => {
   const handleVerify = () => {
     if (!isCodeComplete) return;
     console.log({ email: email.trim(), code });
+    loginMutate.mutate();
   };
 
   return (
-    <Modal open={isOpen} onClose={handleClose} className="w-[520px]">
+    <Modal
+      open={isOpen}
+      onClose={handleClose}
+      className="w-[min(520px,calc(100vw-1rem))]"
+    >
       {typeAuth === "auth" ? (
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2 pr-10">
-            <h3 className="text-[#1A1A1A] font-bold text-3xl">Авторизация</h3>
+            <h3 className="text-[#1A1A1A] font-bold text-2xl md:text-3xl">
+              Авторизация
+            </h3>
             <p className="text-[#6E6E73] font-medium text-base">
               Введите ваш email:
             </p>
@@ -89,7 +120,7 @@ export const AuthModal = () => {
       ) : (
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2 pr-10">
-            <h3 className="text-center text-[#1A1A1A] font-bold text-3xl">
+            <h3 className="text-center text-[#1A1A1A] font-bold text-2xl md:text-3xl">
               Подтверждение
             </h3>
             <p className="text-[#6E6E73] text-center font-medium">

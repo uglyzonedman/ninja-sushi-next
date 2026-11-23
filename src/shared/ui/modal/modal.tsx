@@ -62,7 +62,7 @@ export function Modal({
         type="button"
         onClick={onClose}
         aria-label="Закрыть"
-        className="absolute right-3 top-3 md:right-4 md:top-4flex size-9 cursor-pointer items-center justify-center bg-[#F5F5F7] text-[#1D1D1F] rounded-lg transition-colors hover:bg-[#EBEBEE]"
+        className="absolute right-3 top-3 md:right-4 md:top-4flex size-9 cursor-pointer  justify-center bg-[#F5F5F7] text-[#1D1D1F] flex items-center rounded-lg transition-colors hover:bg-[#EBEBEE]"
       >
         <X className="size-5" />
       </button>

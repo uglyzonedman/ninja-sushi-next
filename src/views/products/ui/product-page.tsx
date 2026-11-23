@@ -1,4 +1,4 @@
-import { Product } from "@/entities/product";
+import { mockProducts, Product, ProductCard } from "@/entities/product";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 
@@ -13,6 +13,12 @@ const MOCK_INGREDIENTS = [
 ];
 
 export const ProductPage = ({ product }: { product: Product }) => {
+  const productsCategory = mockProducts
+    .filter(
+      (item) => item.category === product.category && item.id !== product.id,
+    )
+    .slice(0, 3);
+
   return (
     <section className="mx-auto w-full max-w-main">
       <div className="grid grid-cols-1 gap-6 md:gap-10 lg:grid-cols-2 lg:gap-14">
@@ -89,9 +95,17 @@ export const ProductPage = ({ product }: { product: Product }) => {
         </div>
       </div>
       <div>
-        <div className="flex items-center justify-between">
-          <h3>Может, еще кое-что?</h3>
-          <span>1 из 4</span>
+        <div className="flex items-center justify-between mt-14">
+          <h3 className="text-3xl text-[#1D1D1F] font-bold">
+            Может, еще кое-что?
+          </h3>
+          <span className="text-[#686870] text-xl font-medium">1 из 4</span>
+        </div>
+
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-6">
+          {productsCategory.map((item) => (
+            <ProductCard product={item} key={item.id} />
+          ))}
         </div>
       </div>
     </section>

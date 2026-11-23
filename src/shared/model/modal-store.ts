@@ -1,7 +1,8 @@
 import { create } from "zustand";
 
 /** Все модалки приложения. Новую модалку — добавь сюда id. */
-export type ModalId = "auth" | "cart-modal";
+export type ModalId =
+  "auth" | "cart-modal" | "notification-modal" | "mobile-menu";
 
 type ModalState = {
   opened: Partial<Record<ModalId, boolean>>;
@@ -13,10 +14,11 @@ type ModalState = {
 
 export const useModalStore = create<ModalState>()((set) => ({
   opened: {},
-  openModal: (id) => set((s) => ({ opened: { ...s.opened, [id]: true } })),
+  // Одновременно открыта только одна модалка: открытие закрывает остальные
+  openModal: (id) => set({ opened: { [id]: true } }),
   closeModal: (id) => set((s) => ({ opened: { ...s.opened, [id]: false } })),
   toggleModal: (id) =>
-    set((s) => ({ opened: { ...s.opened, [id]: !s.opened[id] } })),
+    set((s) => ({ opened: s.opened[id] ? {} : { [id]: true } })),
   closeAll: () => set({ opened: {} }),
 }));
 

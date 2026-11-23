@@ -66,7 +66,7 @@ export const CodeInput = ({ length = 4, value, onChange }: CodeInputProps) => {
   };
 
   return (
-    <div className="flex justify-center gap-3">
+    <div className="flex justify-center gap-2 sm:gap-3">
       {Array.from({ length }, (_, index) => {
         const char = value[index];
         return (
@@ -86,7 +86,7 @@ export const CodeInput = ({ length = 4, value, onChange }: CodeInputProps) => {
             onPaste={handlePaste}
             onFocus={(e) => e.target.select()}
             aria-label={`Цифра ${index + 1}`}
-            className="size-16 bg-[#F5F5F7] rounded-xl text-center text-2xl font-bold text-[#1D1D1F] outline-none ring-primary transition-shadow focus:ring-2"
+            className="size-14 sm:size-16 bg-[#F5F5F7] rounded-xl text-center text-2xl font-bold text-[#1D1D1F] outline-none ring-primary transition-shadow focus:ring-2"
           />
         );
       })}

@@ -22,7 +22,7 @@ export const CartItemCard = ({
   onRemove,
 }: CartItemCardProps) => {
   return (
-    <div className="flex items-center justify-between bg-[#F5F5F7] rounded-xl p-4 relative">
+    <div className="flex items-center justify-between gap-3 bg-[#F5F5F7] rounded-xl p-3 sm:p-4 relative">
       <button
         type="button"
         onClick={onRemove}
@@ -37,17 +37,19 @@ export const CartItemCard = ({
           height={58}
           src={image}
           alt={title}
-          className="size-[58px] shrink-0 rounded-lg object-cover"
+          className="size-12 sm:size-[58px] shrink-0 rounded-lg object-cover"
         />
         <div className="min-w-0">
-          <h3 className="text-[#1D1D1F] font-bold truncate">{title}</h3>
-          <span className="text-[#FF6633] text-sm font-medium">
+          <h3 className="text-[#1D1D1F] text-sm sm:text-base font-bold truncate">
+            {title}
+          </h3>
+          <span className="text-[#FF6633] text-xs sm:text-sm font-medium">
             Вес: {weight}г
           </span>
         </div>
       </div>
-      <div className="flex items-center">
-        <div className="flex flex-col items-end min-w-24 tabular-nums">
+      <div className="flex shrink-0 flex-col-reverse items-end gap-1.5 sm:flex-row sm:items-center sm:gap-0">
+        <div className="flex flex-col items-end sm:min-w-24 tabular-nums">
           <span className="text-[#1D1D1F] font-bold whitespace-nowrap">
             {formatPrice(price * quantity)}
           </span>
@@ -57,26 +59,26 @@ export const CartItemCard = ({
             </span>
           )}
         </div>
-        <div className="flex items-center ml-3">
+        <div className="flex items-center sm:ml-3">
           <button
             type="button"
             onClick={onDecrement}
             disabled={quantity <= 1}
             aria-label="Уменьшить количество"
-            className="bg-white rounded-lg text-[#1D1D1F] p-2 disabled:opacity-40"
+            className="bg-white rounded-lg text-[#1D1D1F] p-1.5 sm:p-2 disabled:opacity-40"
           >
-            <Minus />
+            <Minus className="size-4 sm:size-6" />
           </button>
-          <span className="text-[#1D1D1F] text-sm font-medium min-w-8 text-center tabular-nums">
+          <span className="text-[#1D1D1F] text-sm font-medium min-w-7 sm:min-w-8 text-center tabular-nums">
             {quantity}
           </span>
           <button
             type="button"
             onClick={onIncrement}
             aria-label="Увеличить количество"
-            className="bg-white rounded-lg text-[#1D1D1F] p-2"
+            className="bg-white rounded-lg text-[#1D1D1F] p-1.5 sm:p-2"
           >
-            <Plus />
+            <Plus className="size-4 sm:size-6" />
           </button>
         </div>
       </div>

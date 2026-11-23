@@ -57,12 +57,12 @@ export function Modal({
   }, [open, topLayer, onClose]);
 
   const content = (
-    <div className={`relative p-8 ${className}`}>
+    <div className={`relative p-5 md:p-8 ${className}`}>
       <button
         type="button"
         onClick={onClose}
         aria-label="Закрыть"
-        className="absolute right-4 top-4 flex size-9 cursor-pointer items-center justify-center bg-[#F5F5F7] text-[#1D1D1F] rounded-lg transition-colors hover:bg-[#EBEBEE]"
+        className="absolute right-3 top-3 md:right-4 md:top-4flex size-9 cursor-pointer  justify-center bg-[#F5F5F7] text-[#1D1D1F] flex items-center rounded-lg transition-colors hover:bg-[#EBEBEE]"
       >
         <X className="size-5" />
       </button>
@@ -98,7 +98,7 @@ export function Modal({
         // клик по фону (сам <dialog>, а не контент) закрывает модалку
         if (e.target === e.currentTarget) onClose();
       }}
-      className="m-auto rounded-2xl bg-[#FFFFFF] p-0 shadow-[0_24px_64px_rgba(29,29,31,0.18)] backdrop:bg-[#1D1D1F]/50 backdrop:backdrop-blur-sm"
+      className="m-auto max-w-[calc(100vw-1rem)] rounded-2xl bg-[#FFFFFF] p-0shadow-[0_24px_64px_rgba(29,29,31,0.18)] backdrop:bg-[#1D1D1F]/50 backdrop:backdrop-blur-sm"
     >
       {content}
     </dialog>

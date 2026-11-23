@@ -35,27 +35,27 @@ const banners: Banner[] = [
 
 export function HomePage() {
   return (
-    <section className="flex flex-col gap-8">
+    <section className="flex flex-col gap-6 md:gap-8">
       <BannerSlider banners={banners} />
       <CategoryList />
 
       <ProductSection
-        href="/sushi"
+        href="/products/sushi"
         title="Суши"
         products={getProductsByCategory("sushi")}
       />
       <ProductSection
-        href="/rolls"
+        href="/products/rolls"
         title="Роллы"
         products={getProductsByCategory("rolls")}
       />
       <ProductSection
-        href="/sets"
+        href="/products/sets"
         title="Сеты"
         products={getProductsByCategory("sets")}
       />
       <ProductSection
-        href="/drinks"
+        href="/products/drinks"
         title="Напитки"
         products={getProductsByCategory("drinks")}
       />

@@ -1,18 +1,17 @@
 import { Heart, Plus } from "lucide-react";
 import Image from "next/image";
 import { Product } from "../model/types";
+import Link from "next/link";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export const ProductCard = ({
-  product: { description, id, image, price, title, weight },
+  product: { description, id, image, price, title, weight, category },
 }: ProductCardProps) => {
   return (
-    <article
-      key={id}
-      className="group flex flex-col overflow-hidden rounded-2xl md:rounded-3xl bg-white shadow-[0_4px_24px_rgba(29,29,31,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(29,29,31,0.12)]"
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl md:rounded-3xl bg-white shadow-[0_4px_24px_rgba(29,29,31,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(29,29,31,0.12)]"
     >
       <div className="relative aspect-331/290 overflow-hidden bg-[#F7F7F8]">
         <Image
@@ -26,7 +25,13 @@ export const ProductCard = ({
 
       <div className="flex flex-1 flex-col gap-1 p-3 sm:gap-2 md:p-5">
         <h3 className="text-base sm:text-lg md:text-xl font-bold leading-tight text-[#1D1D1F]">
-          {title}
+          {/* Растянутая ссылка: after-псевдоэлемент делает кликабельной всю карточку */}
+          <Link
+            href={`/products/${category}/${id}`}
+            className="after:absolute after:inset-0 after:content-['']"
+          >
+            {title}
+          </Link>
         </h3>
         <span className="text-sm md:text-base font-medium text-primary">
           Вес: {weight}г
@@ -40,7 +45,8 @@ export const ProductCard = ({
             {price} <span className="text-sm md:text-base font-medium">₸</span>
           </p>
 
-          <div className="flex items-center gap-1.5 md:gap-2">
+          {/* relative z-10 — кнопки над растянутой ссылкой, клик не уходит в переход */}
+          <div className="relative z-10 flex items-center gap-1.5 md:gap-2">
             <button
               type="button"
               aria-label="В избранное"

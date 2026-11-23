@@ -9,6 +9,14 @@
   --font-sans: var(--font-inter);
 }
 
+/* Tailwind v4 убрал cursor: pointer у кнопок — возвращаем глобально */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 /* Тонкий аккуратный скроллбар для списков внутри модалок/панелей */
 @utility scrollbar-thin {
   scrollbar-width: thin;
